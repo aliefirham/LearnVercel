@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model SolarCalculation {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Data Kalkulasi
+  monthlyBill   String
+  currentPower  String
+  powerCapacity String
+  roofSize      String
+  monthlyUsage  String
+  roofType      String
+  roofStructure String
+  
+  // Data Pengguna
+  fullName      String
+  companyName   String?
+  email         String
+  position      String?
+  phone         String
+  location      String
+  
+  // Status
+  contacted     Boolean   @default(false)
+  notes         String?
+}
